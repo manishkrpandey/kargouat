@@ -102,16 +102,16 @@ exports.generate_otp = (req, res, next) => {
             // code to save the otp to db and send otp to user
             User.updateOne({phone}, {$set: {otp: otpValue}})
             .then(result => {
-                // msg91.send(phone, otpValue, function (err, response) {
-                //     if(response) {
-                //         res.status(200).json({status:200 });
-                //     } else if(err) {
-                //         const error = new Error('Error with sending otp');
-                //         error.statusCode = 401;
-                //         throw error;
-                //     }
-                // });
-                res.status(200).json({status:200 }); // delete this after uncommenting
+                 msg91.send(phone, otpValue, function (err, response) {
+                     if(response) {
+                         res.status(200).json({status:200 });
+                     } else if(err) {
+                         const error = new Error('Error with sending otp');
+                         error.statusCode = 401;
+                         throw error;
+                     }
+                 });
+                
             })
             .catch(err => {
                 const error = new Error('Error with updating otp');
