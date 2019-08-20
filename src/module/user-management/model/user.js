@@ -40,7 +40,9 @@ const userSchema = new Schema({
     },
     otp: {
         type: Number
-    }
+    },
+    isPhoneVerified: Boolean,
+    default: false
 },
 {
   timestamps: { createdAt: true, updatedAt: true }

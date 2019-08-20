@@ -1,5 +1,6 @@
 const express = require('express');
 const {body} = require('express-validator');
+
 const User = require('../model/user');
 const userController = require('../controller/user')
 

@@ -1,11 +1,40 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const serverProperties = require('./src/module/config/server-config')
+// var multer = require('multer');
 
+const serverProperties = require('./src/module/config/server-config');
 const userRoute = require('./src/module/user-management/routes/user');
+const vehicleRoute = require('./src/module/vehicle-management/routes/vehicle')
 
 var app = express();
+
+// const fileStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'images');
+//   },
+//   filename:(req, file, cb) => {
+//     cb(null, new Date().toISOString() + '-' + file.originalname);
+//   }
+// });
+
+// const fileFilter = (req, file, cb) => {
+//   if (
+//     file.mimetype === 'image/png' ||
+//     file.mimetype === 'image/jpg' ||
+//     file.mimetype === 'image/jpeg'
+//   ) {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
+
+// app.use(
+//   multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+// );
+// app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,11 +53,10 @@ app.use((req, res, next) => {
 
   // forward request to route
     app.use('/user', userRoute);
+    app.use('/vehicle', vehicleRoute);
 
 
   app.use((error, req, res, next) => {
-    console.log('app.js error excuted')
-    // console.log(error);
     const status = error.statusCode || 500;
     const message = error.message;
     const data = error.data;
@@ -41,7 +69,7 @@ app.use((req, res, next) => {
     serverProperties.endPointURL, { useNewUrlParser: true }
   )
   .then(result => {
-      const portNumber = process.env.PORT || 8080;
+      const portNumber = serverProperties.port || 8080;
       if(!module.parent) {
         app.listen(portNumber, () => console.log(`Listening on port ${portNumber}...`));
       }
