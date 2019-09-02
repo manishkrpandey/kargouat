@@ -24,5 +24,5 @@ module.exports = (req, res, next) => {
     }
     // at this place token is valid so extract user id from token and store in response , could be used at other place
     req.userId = decodedToken.userId;
-    next()
+    next();
 };

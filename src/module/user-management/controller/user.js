@@ -12,6 +12,7 @@ exports.signup = (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
+
     const name = req.body.name;
     const phone = req.body.phone;
     const alternatePhone = req.body.alternatePhone;
@@ -40,7 +41,7 @@ exports.signup = (req, res, next) => {
             return user.save();
         })
         .then(result => {
-            res.status(201).json({ message: 'Registration success!', userId: result._id });
+            res.status(201).json({ message: 'Registration success!', status: 201, userId: result._id });
         })
         .catch(err => {
             if (!err.statusCode) {
@@ -109,7 +110,7 @@ exports.generate_otp = (req, res, next) => {
                 .then(result => {
                     msg91.send(phone, otpValue, function (err, response) {
                         if (response) {
-                            res.status(200).json({ status: 200 });
+                            res.status(200).json({ status: 200, message: 'OTP is sent successFully' });
                         } else if (err) {
                             const error = new Error('Error with sending otp');
                             error.statusCode = 401;

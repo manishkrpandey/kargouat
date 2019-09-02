@@ -1,11 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-// var multer = require('multer');
+ var multer = require('multer');
 
 const serverProperties = require('./src/module/config/server-config');
 const userRoute = require('./src/module/user-management/routes/user');
-const vehicleRoute = require('./src/module/vehicle-management/routes/vehicle')
+const vehicleRoute = require('./src/module/vehicle-management/routes/vehicle');
+const driverRoute = require('./src/module/driver-management/routes/driver');
+const requestRoute = require('./src/module/order-management/routes/order');
 
 var app = express();
 
@@ -54,6 +56,8 @@ app.use((req, res, next) => {
   // forward request to route
     app.use('/user', userRoute);
     app.use('/vehicle', vehicleRoute);
+    app.use('/driver', driverRoute);
+    app.use('/request', requestRoute);
 
 
   app.use((error, req, res, next) => {
