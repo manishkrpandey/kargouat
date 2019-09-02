@@ -47,6 +47,5 @@ const userSchema = new Schema({
 {
   timestamps: { createdAt: true, updatedAt: true }
 })
-
 // userSchema.set('timestamps', true);
 module.exports = mongoose.model('User', userSchema); // store in user collection

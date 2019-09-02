@@ -74,5 +74,5 @@ app.use((req, res, next) => {
         app.listen(portNumber, () => console.log(`Listening on port ${portNumber}...`));
       }
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err)) ;
 

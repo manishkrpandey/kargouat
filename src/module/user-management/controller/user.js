@@ -12,7 +12,6 @@ exports.signup = (req, res, next) => {
         error.data = errors.array();
         throw error;
     }
-
     const name = req.body.name;
     const phone = req.body.phone;
     const alternatePhone = req.body.alternatePhone;

@@ -22,7 +22,6 @@ router.post('/signup', [
     body('pan').trim().isLength({min: 10, max:10}),
     body('gender').trim().not().isEmpty(),
     body('password').trim().isLength({min: 4, max: 20})
-
 ], userController.signup);
 
 router.post('/login', userController.login);
