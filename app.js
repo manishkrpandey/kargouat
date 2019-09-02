@@ -73,7 +73,7 @@ app.use((req, res, next) => {
     serverProperties.endPointURL, { useNewUrlParser: true }
   )
   .then(result => {
-      const portNumber = serverProperties.port || 8080;
+      const portNumber = serverProperties.port || 80000;
       if(!module.parent) {
         app.listen(portNumber, () => console.log(`Listening on port ${portNumber}...`));
       }
